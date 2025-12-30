@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Access Demo</title>
+</head>
+<body>
+    <h1>Camera Access Demo</h1>
+    <p>This is a safe example. Click the button to request camera access (you'll see a permission prompt).</p>
+    <button id="startButton">Start Camera</button>
+    <video id="video" width="320" height="240" autoplay></video>
+    
+    <script>
+        const startButton = document.getElementById('startButton');
+        const video = document.getElementById('video');
+        
+        startButton.addEventListener('click', async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+                alert('Camera access denied or not supported.');
+            }
+        });
+    </script>
+</body>
+</html>
